@@ -168,6 +168,23 @@
             margin-top: 0.4rem;
         }
 
+        .btn-preset {
+            background: #1C2028;
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.7rem;
+            padding: 3px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-preset:hover, .btn-preset.active {
+            background: #FFFFFF;
+            color: #0B0D10;
+            border-color: #FFFFFF;
+        }
+
         /* Buttons */
         .btn-primary {
             background: var(--accent-bg);
@@ -411,34 +428,30 @@
                 </div>
 
                 <div>
-                    <label for="templateInput">Draft Template Pesan WhatsApp</label>
-                    <textarea id="templateInput" rows="10">Kepada Yth.
+                    <div style="margin-bottom: 0.6rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+                        <label for="templateInput" style="margin-bottom: 0;">Template Pesan WhatsApp</label>
+                        <div style="display: flex; gap: 6px;">
+                            <button type="button" class="btn-preset active" id="presetShortBtn">Singkat &amp; Elegan</button>
+                            <button type="button" class="btn-preset" id="presetMinimalBtn">Super Ringkas</button>
+                        </div>
+                    </div>
+                    <textarea id="templateInput" rows="9">Kepada Yth.
 *Bapak/Ibu/Saudara/i {nama}*
-di Tempat
 
 _Assalamu’alaikum Warahmatullahi Wabarakatuh_
 
-Tanpa mengurangi rasa hormat, perkenankan kami mengundang Bapak/Ibu/Saudara/i untuk hadir dan memberikan doa restu pada hari bahagia pernikahan kami:
+Tanpa mengurangi rasa hormat, perkenankan kami mengundang Bapak/Ibu/Saudara/i untuk hadir pada hari bahagia pernikahan kami:
 
 *Siti Fadilah & Hambali*
 
-Acara akan diselenggarakan pada:
-Hari / Tgl : *Minggu, 18 Oktober 2026*
-Pukul      : *09.00 WIB s/d Selesai*
-Lokasi     : *Kediaman Mempelai Wanita*
-(Kp. Tengah, Desa Karang Serang, Kec. Sukadiri, Kab. Tangerang)
-
-Untuk informasi lengkap jadwal acara, panduan peta lokasi, dan konfirmasi kehadiran, silakan kunjungi tautan undangan resmi kami:
+Untuk informasi jadwal, lokasi, dan konfirmasi kehadiran, silakan buka tautan undangan resmi berikut:
 👉 {link}
 
 Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu.
 
-_Wassalamu’alaikum Warahmatullahi Wabarakatuh_
-
-Kami yang berbahagia,
-*Siti Fadilah & Hambali*
-Beserta Keluarga Besar</textarea>
-                    <p class="input-hint">Gunakan <code>{nama}</code> untuk nama tamu dan <code>{link}</code> untuk link personal.</p>
+Terima kasih.
+_Wassalamu’alaikum Wr. Wb._</textarea>
+                    <p class="input-hint">Pesan dibuat singkat agar tamu penasaran membuka website undangan. Gunakan <code>{nama}</code> dan <code>{link}</code>.</p>
                 </div>
             </div>
 
@@ -531,12 +544,63 @@ Teman Kantor Hambali"></textarea>
 
             let generatedData = [];
 
-            // Load saved settings
+            // Presets
+            const templateShort = `Kepada Yth.
+*Bapak/Ibu/Saudara/i {nama}*
+
+_Assalamu’alaikum Warahmatullahi Wabarakatuh_
+
+Tanpa mengurangi rasa hormat, perkenankan kami mengundang Bapak/Ibu/Saudara/i untuk hadir pada hari bahagia pernikahan kami:
+
+*Siti Fadilah & Hambali*
+
+Untuk informasi jadwal, lokasi, dan konfirmasi kehadiran, silakan buka tautan undangan resmi berikut:
+👉 {link}
+
+Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu.
+
+Terima kasih.
+_Wassalamu’alaikum Wr. Wb._`;
+
+            const templateMinimal = `Kepada Yth.
+*Bapak/Ibu/Saudara/i {nama}*
+
+Tanpa mengurangi rasa hormat, kami mengundang Anda untuk merayakan hari pernikahan kami:
+
+*Siti Fadilah & Hambali*
+
+Buka undangan resmi & detail acara di tautan berikut:
+👉 {link}
+
+Terima kasih atas doa dan restunya.`;
+
+            const presetShortBtn = document.getElementById('presetShortBtn');
+            const presetMinimalBtn = document.getElementById('presetMinimalBtn');
+
+            presetShortBtn.addEventListener('click', () => {
+                templateInput.value = templateShort;
+                presetShortBtn.classList.add('active');
+                presetMinimalBtn.classList.remove('active');
+                localStorage.setItem('generator_wa_template_v3', templateShort);
+                showToast('Template diubah: Singkat & Elegan');
+            });
+
+            presetMinimalBtn.addEventListener('click', () => {
+                templateInput.value = templateMinimal;
+                presetMinimalBtn.classList.add('active');
+                presetShortBtn.classList.remove('active');
+                localStorage.setItem('generator_wa_template_v3', templateMinimal);
+                showToast('Template diubah: Super Ringkas');
+            });
+
+            // Load saved settings (use v3 to avoid old long template)
             if (localStorage.getItem('generator_base_url')) {
                 baseUrlInput.value = localStorage.getItem('generator_base_url');
             }
-            if (localStorage.getItem('generator_wa_template')) {
-                templateInput.value = localStorage.getItem('generator_wa_template');
+            if (localStorage.getItem('generator_wa_template_v3')) {
+                templateInput.value = localStorage.getItem('generator_wa_template_v3');
+            } else {
+                templateInput.value = templateShort;
             }
 
             function showToast(msg) {
