@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Invitation Generator — Siti Fadilah & Hambali</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-body: #0B0D10;
+            --bg-card: #14171D;
+            --bg-card-subtle: #1C2028;
+            --text-main: #FFFFFF;
+            --text-muted: #8E99A8;
+            --border: rgba(255, 255, 255, 0.12);
+            --border-hover: rgba(255, 255, 255, 0.28);
+            --accent: #FFFFFF;
+            --accent-bg: #FFFFFF;
+            --accent-text: #0B0D10;
+            --success: #34D399;
+            --font-serif: 'Playfair Display', Georgia, serif;
+            --font-sans: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            --font-mono: 'Space Grotesk', monospace;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            min-height: 100vh;
+            padding: 2.5rem 1.5rem 4rem 1.5rem;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 1080px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-sub {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            letter-spacing: 4px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .header-title {
+            font-family: var(--font-serif);
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+
+        .header-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 0.6rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Config Grid */
+        .config-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .config-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .card-title {
+            font-size: 0.88rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-title span.badge {
+            background: var(--bg-card-subtle);
+            border: 1px solid var(--border);
+            font-size: 0.65rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            color: var(--text-muted);
+        }
+
+        label {
+            display: block;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-bottom: 0.4rem;
+            font-family: var(--font-mono);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        input[type="text"], textarea {
+            width: 100%;
+            background: #090B0E;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-main);
+            padding: 0.75rem 1rem;
+            font-size: 0.88rem;
+            font-family: var(--font-sans);
+            transition: border-color 0.2s ease;
+        }
+
+        input[type="text"]:focus, textarea:focus {
+            outline: none;
+            border-color: #FFFFFF;
+        }
+
+        textarea {
+            resize: vertical;
+            line-height: 1.5;
+            font-family: var(--font-mono);
+            font-size: 0.82rem;
+        }
+
+        .input-hint {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            margin-top: 0.4rem;
+        }
+
+        /* Buttons */
+        .btn-primary {
+            background: var(--accent-bg);
+            color: var(--accent-text);
+            border: none;
+            border-radius: 8px;
+            padding: 0.85rem 1.6rem;
+            font-size: 0.82rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .btn-primary:hover {
+            background: #E5E7EB;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #FFFFFF;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 0.45rem 0.85rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none;
+        }
+
+        .btn-secondary:hover {
+            border-color: #FFFFFF;
+            background: var(--bg-card-subtle);
+        }
+
+        .btn-wa {
+            background: #10B981;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 6px;
+            padding: 0.45rem 0.85rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none;
+        }
+
+        .btn-wa:hover {
+            background: #059669;
+        }
+
+        /* Results Section */
+        .results-box {
+            margin-top: 2rem;
+        }
+
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .results-counter {
+            font-family: var(--font-mono);
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+
+        .results-counter strong {
+            color: #FFFFFF;
+        }
+
+        .results-actions {
+            display: flex;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+        }
+
+        /* Table */
+        .table-wrap {
+            overflow-x: auto;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: var(--bg-card);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.84rem;
+        }
+
+        th {
+            background: #0E1015;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 1rem 1.2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        td {
+            padding: 1rem 1.2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            vertical-align: middle;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .guest-col {
+            font-weight: 600;
+            color: #FFFFFF;
+            min-width: 180px;
+        }
+
+        .link-col {
+            font-family: var(--font-mono);
+            font-size: 0.76rem;
+            color: var(--text-muted);
+            max-width: 320px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .link-col a {
+            color: #93C5FD;
+            text-decoration: none;
+        }
+
+        .link-col a:hover {
+            text-decoration: underline;
+        }
+
+        .actions-col {
+            display: flex;
+            gap: 6px;
+            justify-content: flex-end;
+            min-width: 280px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3.5rem 1.5rem;
+            color: var(--text-muted);
+        }
+
+        .empty-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            opacity: 0.5;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #111317;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #FFFFFF;
+            padding: 0.85rem 1.4rem;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 99999;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--success);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <span class="header-sub">INTERNAL GENERATOR TOOL</span>
+            <h1 class="header-title">Siti Fadilah & Hambali</h1>
+            <p class="header-desc">
+                Alat bantu otomatis untuk membuat link undangan personal dan format pesan WhatsApp rapi untuk ratusan tamu sekaligus.
+            </p>
+        </header>
+
+        <!-- Config Grid -->
+        <div class="config-grid">
+            <!-- Left: Base URL & Template -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">1. Pengaturan Dasar <span class="badge">WA Template</span></h2>
+                </div>
+                
+                <div style="margin-bottom: 1.2rem;">
+                    <label for="baseUrlInput">Domain / URL Website Undangan</label>
+                    <input type="text" id="baseUrlInput" value="https://hambali-sitifadilah.vercel.app">
+                    <p class="input-hint">Ganti dengan domain Vercel Anda setelah website di-publish.</p>
+                </div>
+
+                <div>
+                    <label for="templateInput">Draft Template Pesan WhatsApp</label>
+                    <textarea id="templateInput" rows="10">Kepada Yth.
+*Bapak/Ibu/Saudara/i {nama}*
+di Tempat
+
+_Assalamu’alaikum Warahmatullahi Wabarakatuh_
+
+Tanpa mengurangi rasa hormat, perkenankan kami mengundang Bapak/Ibu/Saudara/i untuk hadir dan memberikan doa restu pada hari bahagia pernikahan kami:
+
+*Siti Fadilah & Hambali*
+
+Acara akan diselenggarakan pada:
+Hari / Tgl : *Minggu, 18 Oktober 2026*
+Pukul      : *09.00 WIB s/d Selesai*
+Lokasi     : *Kediaman Mempelai Wanita*
+(Kp. Tengah, Desa Karang Serang, Kec. Sukadiri, Kab. Tangerang)
+
+Untuk informasi lengkap jadwal acara, panduan peta lokasi, dan konfirmasi kehadiran, silakan kunjungi tautan undangan resmi kami:
+👉 {link}
+
+Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu.
+
+_Wassalamu’alaikum Warahmatullahi Wabarakatuh_
+
+Kami yang berbahagia,
+*Siti Fadilah & Hambali*
+Beserta Keluarga Besar</textarea>
+                    <p class="input-hint">Gunakan <code>{nama}</code> untuk nama tamu dan <code>{link}</code> untuk link personal.</p>
+                </div>
+            </div>
+
+            <!-- Right: Bulk Names Input -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">2. Daftar Nama Tamu <span class="badge">Bisa Banyak Sekaligus</span></h2>
+                </div>
+
+                <label for="bulkNamesInput">Ketik / Tempel Daftar Tamu (1 Baris = 1 Tamu)</label>
+                <textarea id="bulkNamesInput" rows="14" placeholder="Contoh:
+Bpk. H. Mahmud & Keluarga
+Ibu Rina Anggraini
+Dika Pratama
+Keluarga Besar Bpk. Suhaedi
+Sahabat SMA 1 Tangerang
+Teman Kantor Hambali"></textarea>
+                <p class="input-hint">Bisa tempel puluhan atau ratusan nama langsung dari Excel atau WhatsApp.</p>
+
+                <button class="btn-primary" id="generateBtn">
+                    <span>GENERATE SEMUA LINK TAMU</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div class="results-box">
+            <div class="results-header">
+                <div class="results-counter">
+                    Total: <strong id="totalGuestsCount">0</strong> Tamu Siap Dikirim
+                </div>
+                <div class="results-actions" id="bulkActionsBar" style="display: none;">
+                    <button class="btn-secondary" id="copyAllLinksBtn">
+                        Salin Semua Link Saja
+                    </button>
+                    <button class="btn-secondary" id="copyAllMessagesBtn">
+                        Salin Semua Pesan WA
+                    </button>
+                    <button class="btn-secondary" id="exportCsvBtn">
+                        Export ke CSV (Excel)
+                    </button>
+                </div>
+            </div>
+
+            <div class="table-wrap">
+                <table id="guestTable">
+                    <thead>
+                        <tr>
+                            <th style="width: 45px;">No</th>
+                            <th>Nama Tamu</th>
+                            <th>Link Personal</th>
+                            <th style="text-align: right;">Aksi Cepat</th>
+                        </tr>
+                    </thead>
+                    <tbody id="guestTableBody">
+                        <tr>
+                            <td colspan="4">
+                                <div class="empty-state">
+                                    <div class="empty-icon">—</div>
+                                    <p>Belum ada daftar tamu. Masukkan nama-nama tamu di atas lalu klik tombol <strong>GENERATE</strong>.</p>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <span class="toast-dot"></span>
+        <span id="toastMsg">Berhasil disalin!</span>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const baseUrlInput = document.getElementById('baseUrlInput');
+            const templateInput = document.getElementById('templateInput');
+            const bulkNamesInput = document.getElementById('bulkNamesInput');
+            const generateBtn = document.getElementById('generateBtn');
+            const guestTableBody = document.getElementById('guestTableBody');
+            const totalGuestsCount = document.getElementById('totalGuestsCount');
+            const bulkActionsBar = document.getElementById('bulkActionsBar');
+            const copyAllLinksBtn = document.getElementById('copyAllLinksBtn');
+            const copyAllMessagesBtn = document.getElementById('copyAllMessagesBtn');
+            const exportCsvBtn = document.getElementById('exportCsvBtn');
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toastMsg');
+
+            let generatedData = [];
+
+            // Load saved settings
+            if (localStorage.getItem('generator_base_url')) {
+                baseUrlInput.value = localStorage.getItem('generator_base_url');
+            }
+            if (localStorage.getItem('generator_wa_template')) {
+                templateInput.value = localStorage.getItem('generator_wa_template');
+            }
+
+            function showToast(msg) {
+                toastMsg.textContent = msg;
+                toast.classList.add('show');
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 2400);
+            }
+
+            function sanitizeBaseUrl(url) {
+                return url.trim().replace(/\/+$/, '');
+            }
+
+            function generateLink(baseUrl, guestName) {
+                // Encode space as + and special characters properly
+                const encoded = encodeURIComponent(guestName).replace(/%20/g, '+');
+                return `${baseUrl}/?to=${encoded}`;
+            }
+
+            function generateMessage(template, guestName, guestLink) {
+                return template
+                    .replace(/{nama}/g, guestName)
+                    .replace(/{link}/g, guestLink);
+            }
+
+            generateBtn.addEventListener('click', () => {
+                const rawNames = bulkNamesInput.value.trim();
+                const baseUrl = sanitizeBaseUrl(baseUrlInput.value) || 'https://hambali-sitifadilah.vercel.app';
+                const template = templateInput.value;
+
+                if (!rawNames) {
+                    showToast('Silakan masukkan minimal 1 nama tamu.');
+                    bulkNamesInput.focus();
+                    return;
+                }
+
+                // Save settings
+                localStorage.setItem('generator_base_url', baseUrl);
+                localStorage.setItem('generator_wa_template', template);
+
+                // Split by line
+                const names = rawNames.split('\n')
+                    .map(n => n.trim())
+                    .filter(n => n.length > 0);
+
+                if (names.length === 0) {
+                    showToast('Daftar nama tidak valid.');
+                    return;
+                }
+
+                generatedData = names.map((name, index) => {
+                    const link = generateLink(baseUrl, name);
+                    const message = generateMessage(template, name, link);
+                    return { index: index + 1, name, link, message };
+                });
+
+                renderTable();
+                showToast(`Berhasil men-generate ${generatedData.length} link tamu!`);
+            });
+
+            function renderTable() {
+                guestTableBody.innerHTML = '';
+                totalGuestsCount.textContent = generatedData.length;
+
+                if (generatedData.length === 0) {
+                    bulkActionsBar.style.display = 'none';
+                    guestTableBody.innerHTML = `
+                        <tr>
+                            <td colspan="4">
+                                <div class="empty-state">
+                                    <p>Belum ada daftar tamu.</p>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                    return;
+                }
+
+                bulkActionsBar.style.display = 'flex';
+
+                generatedData.forEach(item => {
+                    const tr = document.createElement('tr');
+                    
+                    const waDirectUrl = `https://wa.me/?text=${encodeURIComponent(item.message)}`;
+
+                    tr.innerHTML = `
+                        <td style="color: var(--text-muted); font-family: var(--font-mono);">${item.index}</td>
+                        <td class="guest-col">${escapeHtml(item.name)}</td>
+                        <td class="link-col" title="${escapeHtml(item.link)}">
+                            <a href="${escapeHtml(item.link)}" target="_blank">${escapeHtml(item.link)}</a>
+                        </td>
+                        <td>
+                            <div class="actions-col">
+                                <button class="btn-secondary copy-link-btn" data-link="${escapeHtml(item.link)}" title="Salin Link Saja">
+                                    Salin Link
+                                </button>
+                                <button class="btn-secondary copy-msg-btn" data-index="${item.index - 1}" title="Salin Pesan WA Lengkap">
+                                    Salin Pesan WA
+                                </button>
+                                <a href="${waDirectUrl}" target="_blank" class="btn-wa" title="Kirim Langsung ke WhatsApp">
+                                    Kirim WA
+                                </a>
+                            </div>
+                        </td>
+                    `;
+                    guestTableBody.appendChild(tr);
+                });
+
+                // Bind copy buttons
+                document.querySelectorAll('.copy-link-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const link = btn.getAttribute('data-link');
+                        navigator.clipboard.writeText(link).then(() => {
+                            showToast('Link personal disalin ke clipboard!');
+                        });
+                    });
+                });
+
+                document.querySelectorAll('.copy-msg-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const idx = parseInt(btn.getAttribute('data-index'), 10);
+                        const data = generatedData[idx];
+                        if (data) {
+                            navigator.clipboard.writeText(data.message).then(() => {
+                                showToast(`Pesan WA untuk ${data.name} disalin!`);
+                            });
+                        }
+                    });
+                });
+            }
+
+            // Copy all links
+            copyAllLinksBtn.addEventListener('click', () => {
+                if (generatedData.length === 0) return;
+                const text = generatedData.map(d => `${d.name}: ${d.link}`).join('\n');
+                navigator.clipboard.writeText(text).then(() => {
+                    showToast(`Seluruh ${generatedData.length} link tamu berhasil disalin!`);
+                });
+            });
+
+            // Copy all messages
+            copyAllMessagesBtn.addEventListener('click', () => {
+                if (generatedData.length === 0) return;
+                const text = generatedData.map(d => `--- UNTUK: ${d.name} ---\n${d.message}\n`).join('\n\n');
+                navigator.clipboard.writeText(text).then(() => {
+                    showToast(`Seluruh ${generatedData.length} format pesan WA berhasil disalin!`);
+                });
+            });
+
+            // Export to CSV
+            exportCsvBtn.addEventListener('click', () => {
+                if (generatedData.length === 0) return;
+                let csv = 'No,Nama Tamu,Link Undangan\n';
+                generatedData.forEach(d => {
+                    csv += `"${d.index}","${d.name.replace(/"/g, '""')}","${d.link}"\n`;
+                });
+
+                const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `daftar_link_undangan_siti_hambali.csv`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                showToast('Berkas CSV berhasil diunduh!');
+            });
+
+            function escapeHtml(str) {
+                return str.replace(/[&<>'"]/g, tag => ({
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    "'": '&#39;',
+                    '"': '&quot;'
+                }[tag] || tag));
+            }
+        });
+    </script>
+</body>
+</html>
