@@ -512,38 +512,127 @@
             margin-top: -0.8rem;
         }
 
-        /* Cinematic Section Scroll Transitions */
+        /* ==========================================================================
+           CINEMATIC SCROLL POP-UP IN & OUT ENGINE (TYPOGRAPHY & CARD LIFT)
+           ========================================================================== */
         .section-reveal {
+            opacity: 1;
+        }
+
+        /* 1. Header Typography Pop Up In/Out (Subtitles & Main Titles) */
+        .section-header-clean .section-sub,
+        .section-header-clean .section-main-title {
             opacity: 0;
-            transform: translateY(45px);
-            filter: blur(6px);
-            transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
-                        transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
-                        filter 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(24px) scale(0.98);
+            filter: blur(5px);
+            transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), 
+                        transform 0.85s cubic-bezier(0.16, 1, 0.3, 1), 
+                        filter 0.85s cubic-bezier(0.16, 1, 0.3, 1);
             will-change: opacity, transform, filter;
         }
 
-        .section-reveal.in-view {
+        .section-header-clean.in-view .section-sub {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: blur(0);
+            transition-delay: 0.08s;
+        }
+
+        .section-header-clean.in-view .section-main-title {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: blur(0);
+            transition-delay: 0.2s;
+        }
+
+        /* 2. Sacred Verse Typography Pop Up In/Out */
+        .verse-eyebrow,
+        .verse-quote,
+        .verse-source {
+            opacity: 0;
+            transform: translateY(26px) scale(0.98);
+            filter: blur(5px);
+            transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), 
+                        transform 0.9s cubic-bezier(0.16, 1, 0.3, 1), 
+                        filter 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform, filter;
+        }
+
+        .verse-section.in-view .verse-eyebrow {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: blur(0);
+            transition-delay: 0.1s;
+        }
+
+        .verse-section.in-view .verse-quote {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: blur(0);
+            transition-delay: 0.24s;
+        }
+
+        .verse-section.in-view .verse-source {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: blur(0);
+            transition-delay: 0.38s;
+        }
+
+        /* 3. Bride & Groom Profile Typography & Cards Pop Up In/Out */
+        .profile-card-clean {
+            opacity: 0;
+            transform: translateY(32px) scale(0.97);
+            transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), 
+                        transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+
+        .profile-card-clean.in-view {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .profile-role,
+        .profile-person-name,
+        .profile-parents,
+        .profile-address {
+            opacity: 0;
+            transform: translateY(20px);
+            filter: blur(4px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
+                        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
+                        filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform, filter;
+        }
+
+        .profile-card-clean.in-view .profile-role {
             opacity: 1;
             transform: translateY(0);
             filter: blur(0);
+            transition-delay: 0.12s;
         }
 
-        .stagger-child {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .in-view .stagger-child {
+        .profile-card-clean.in-view .profile-person-name {
             opacity: 1;
             transform: translateY(0);
+            filter: blur(0);
+            transition-delay: 0.24s;
         }
 
-        .in-view .stagger-child:nth-child(1) { transition-delay: 0.1s; }
-        .in-view .stagger-child:nth-child(2) { transition-delay: 0.22s; }
-        .in-view .stagger-child:nth-child(3) { transition-delay: 0.34s; }
-        .in-view .stagger-child:nth-child(4) { transition-delay: 0.46s; }
+        .profile-card-clean.in-view .profile-parents {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+            transition-delay: 0.36s;
+        }
+
+        .profile-card-clean.in-view .profile-address {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+            transition-delay: 0.48s;
+        }
 
         /* ==========================================================================
            3. SECTION 2: SACRED VERSE (CLEAN OFF-WHITE BREAK)
@@ -869,6 +958,39 @@
             padding-top: 1.6rem;
         }
 
+        .story-journey-title,
+        .story-journey-text,
+        .story-quote-card {
+            opacity: 0;
+            transform: translateY(20px);
+            filter: blur(4px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
+                        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
+                        filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform, filter;
+        }
+
+        .story-journey-item.in-view .story-journey-title {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+            transition-delay: 0.14s;
+        }
+
+        .story-journey-item.in-view .story-journey-text {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+            transition-delay: 0.26s;
+        }
+
+        .story-journey-item.in-view .story-quote-card {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+            transition-delay: 0.38s;
+        }
+
         .story-journey-title {
             font-family: var(--font-serif);
             font-size: clamp(1.85rem, 3.2vw, 2.4rem);
@@ -1059,35 +1181,37 @@
             line-height: 1.68;
         }
 
-        /* 2. Venue Card - Distinctive Obsidian Architectural Showcase */
+        /* 2. Venue Card - Compact Architectural Showcase */
         .venue-card-clean {
-            max-width: 1100px;
+            max-width: 580px;
             margin: 0 auto;
             background: linear-gradient(145deg, #15181E 0%, #0D0E12 100%);
             color: #FFFFFF;
             border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 24px;
-            padding: 4.5rem 3.5rem;
+            border-radius: 18px;
+            padding: 2.4rem 2rem;
             text-align: center;
-            box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.04) inset;
+            box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.04) inset;
             position: relative;
             overflow: hidden;
             opacity: 0;
-            transform: translateY(32px) scale(0.97);
+            transform: translateY(28px) scale(0.97);
+            filter: blur(5px);
             transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), 
                         transform 0.85s cubic-bezier(0.16, 1, 0.3, 1), 
-                        box-shadow 0.6s ease, 
-                        border-color 0.6s ease;
+                        filter 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+                        box-shadow 0.5s ease, 
+                        border-color 0.5s ease;
         }
 
         .venue-card-clean::before {
             content: '';
             position: absolute;
-            top: -60px;
+            top: -40px;
             left: 50%;
             transform: translateX(-50%);
-            width: 380px;
-            height: 180px;
+            width: 260px;
+            height: 120px;
             background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
             pointer-events: none;
         }
@@ -1095,12 +1219,13 @@
         .venue-card-clean.in-view {
             opacity: 1;
             transform: translateY(0) scale(1);
+            filter: blur(0);
         }
 
         .venue-card-clean:hover {
-            transform: translateY(-5px) scale(1.006);
-            box-shadow: 0 35px 75px -15px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
-            border-color: rgba(255, 255, 255, 0.25);
+            transform: translateY(-4px) scale(1.006);
+            box-shadow: 0 24px 50px -10px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+            border-color: rgba(255, 255, 255, 0.22);
         }
 
         /* Staggered text animations for Venue Card (cascading on scroll in/out) */
@@ -1109,88 +1234,97 @@
         .venue-card-clean .venue-clean-addr,
         .venue-card-clean .action-links-row {
             opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(16px);
+            filter: blur(4px);
+            transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), 
+                        transform 0.75s cubic-bezier(0.16, 1, 0.3, 1), 
+                        filter 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform, filter;
         }
 
         .venue-card-clean.in-view .venue-badge {
             opacity: 1;
             transform: translateY(0);
-            transition-delay: 0.15s;
+            filter: blur(0);
+            transition-delay: 0.1s;
         }
         .venue-card-clean.in-view h3 {
             opacity: 1;
             transform: translateY(0);
-            transition-delay: 0.25s;
+            filter: blur(0);
+            transition-delay: 0.2s;
         }
         .venue-card-clean.in-view .venue-clean-addr {
             opacity: 1;
             transform: translateY(0);
-            transition-delay: 0.35s;
+            filter: blur(0);
+            transition-delay: 0.3s;
         }
         .venue-card-clean.in-view .action-links-row {
             opacity: 1;
             transform: translateY(0);
-            transition-delay: 0.45s;
+            filter: blur(0);
+            transition-delay: 0.4s;
         }
 
         .venue-badge {
             display: inline-flex;
             align-items: center;
-            gap: 9px;
+            gap: 7px;
             font-family: var(--font-mono);
-            font-size: 0.7rem;
-            letter-spacing: 2.5px;
+            font-size: 0.64rem;
+            letter-spacing: 2px;
             color: rgba(255, 255, 255, 0.85);
             text-transform: uppercase;
             background: rgba(255, 255, 255, 0.06);
             border: 1px solid rgba(255, 255, 255, 0.12);
-            padding: 6px 18px;
+            padding: 4px 14px;
             border-radius: 100px;
-            margin-bottom: 1.5rem;
+            margin-bottom: 0.9rem;
         }
 
         .venue-badge-icon {
-            width: 14px;
-            height: 14px;
+            width: 12px;
+            height: 12px;
             stroke: #FFFFFF;
         }
 
         .venue-card-clean h3 {
             font-family: var(--font-serif);
-            font-size: clamp(2.1rem, 3.8vw, 2.7rem);
+            font-size: clamp(1.4rem, 2.4vw, 1.75rem);
             font-weight: 500;
             color: #FFFFFF;
-            margin-bottom: 1.1rem;
-            line-height: 1.2;
+            margin-bottom: 0.7rem;
+            line-height: 1.25;
+            letter-spacing: 0.2px;
         }
 
         .venue-clean-addr {
-            font-size: 1.05rem;
+            font-size: 0.88rem;
             color: rgba(255, 255, 255, 0.72);
-            max-width: 650px;
-            margin: 0 auto 2.8rem auto;
-            line-height: 1.72;
-            letter-spacing: 0.2px;
+            max-width: 480px;
+            margin: 0 auto 1.6rem auto;
+            line-height: 1.6;
+            letter-spacing: 0.1px;
         }
 
         .action-links-row {
             display: flex;
             justify-content: center;
-            gap: 1.2rem;
+            gap: 0.85rem;
             flex-wrap: wrap;
         }
 
         .clean-btn {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            padding: 0.95rem 2.2rem;
+            gap: 8px;
+            padding: 0.65rem 1.4rem;
             border-radius: 100px;
             font-family: var(--font-sans);
-            font-size: 0.78rem;
+            font-size: 0.72rem;
             font-weight: 600;
-            letter-spacing: 1.6px;
+            letter-spacing: 1.2px;
             text-decoration: none;
             text-transform: uppercase;
             transition: var(--transition);
@@ -1200,33 +1334,33 @@
             background: #FFFFFF;
             color: #0E1013;
             border: 1px solid #FFFFFF;
-            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 14px rgba(255, 255, 255, 0.18);
         }
 
         .clean-btn.solid-dark:hover {
             background: #F1F3F5;
             color: #000000;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(255, 255, 255, 0.35);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
         }
 
         .clean-btn.outline-dark {
             background: rgba(255, 255, 255, 0.05);
             color: #FFFFFF;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.18);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
         }
 
         .clean-btn.outline-dark:hover {
             background: rgba(255, 255, 255, 0.12);
-            border-color: rgba(255, 255, 255, 0.4);
-            transform: translateY(-3px);
+            border-color: rgba(255, 255, 255, 0.35);
+            transform: translateY(-2px);
         }
 
         .clean-btn svg {
-            width: 15px;
-            height: 15px;
+            width: 13px;
+            height: 13px;
             flex-shrink: 0;
         }
 
@@ -1251,10 +1385,27 @@
         .triptych-item {
             position: relative;
             height: 520px;
-            border-radius: 6px;
+            border-radius: 10px;
             overflow: hidden;
             border: 1px solid var(--border-light);
+            opacity: 0;
+            transform: translateY(32px) scale(0.96);
+            filter: blur(5px);
+            transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), 
+                        transform 0.85s cubic-bezier(0.16, 1, 0.3, 1), 
+                        filter 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform, filter;
         }
+
+        .triptych-item.in-view {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: blur(0);
+        }
+
+        .triptych-item:nth-child(1).in-view { transition-delay: 0.1s; }
+        .triptych-item:nth-child(2).in-view { transition-delay: 0.24s; }
+        .triptych-item:nth-child(3).in-view { transition-delay: 0.38s; }
 
         .triptych-item img {
             width: 100%;
@@ -1286,6 +1437,20 @@
             max-width: 580px;
             margin: 0 auto 3rem auto;
             line-height: 1.75;
+            opacity: 0;
+            transform: translateY(20px);
+            filter: blur(4px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
+                        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
+                        filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform, filter;
+        }
+
+        .gift-section-clean.in-view .gift-lead {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+            transition-delay: 0.12s;
         }
 
         .gift-cards-row {
@@ -1300,8 +1465,8 @@
         .gift-card-clean {
             background: #FFFFFF;
             border: 1px solid var(--border-dark);
-            border-radius: 12px;
-            padding: 2.5rem 2rem;
+            border-radius: 16px;
+            padding: 2.8rem 2.2rem;
             width: 100%;
             max-width: 350px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
@@ -1309,12 +1474,28 @@
             flex-direction: column;
             align-items: center;
             text-align: center;
-            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(32px) scale(0.97);
+            filter: blur(5px);
+            transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), 
+                        transform 0.85s cubic-bezier(0.16, 1, 0.3, 1), 
+                        filter 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+                        box-shadow 0.4s ease;
+            will-change: opacity, transform, filter;
         }
 
+        .gift-card-clean.in-view {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: blur(0);
+        }
+
+        .gift-card-clean:nth-child(1).in-view { transition-delay: 0.14s; }
+        .gift-card-clean:nth-child(2).in-view { transition-delay: 0.28s; }
+
         .gift-card-clean:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08);
+            transform: translateY(-5px) scale(1.008);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.09);
             border-color: rgba(17, 19, 23, 0.22);
         }
 
@@ -1424,8 +1605,22 @@
         .rsvp-form-card {
             background: var(--bg-card-dark);
             border: 1px solid var(--border-light);
-            border-radius: 8px;
+            border-radius: 12px;
             padding: 3rem 2.5rem;
+            opacity: 0;
+            transform: translateY(32px) scale(0.97);
+            filter: blur(5px);
+            transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), 
+                        transform 0.85s cubic-bezier(0.16, 1, 0.3, 1), 
+                        filter 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform, filter;
+        }
+
+        .rsvp-form-card.in-view {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: blur(0);
+            transition-delay: 0.12s;
         }
 
         .form-field {
@@ -1525,10 +1720,24 @@
         .wishes-stream-box {
             background: var(--bg-card-dark);
             border: 1px solid var(--border-light);
-            border-radius: 8px;
+            border-radius: 12px;
             height: 480px;
             overflow-y: auto;
             padding: 2rem;
+            opacity: 0;
+            transform: translateY(32px) scale(0.97);
+            filter: blur(5px);
+            transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), 
+                        transform 0.85s cubic-bezier(0.16, 1, 0.3, 1), 
+                        filter 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform, filter;
+        }
+
+        .wishes-stream-box.in-view {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: blur(0);
+            transition-delay: 0.24s;
         }
 
         .wishes-stream-box::-webkit-scrollbar {
@@ -1601,6 +1810,39 @@
             border-top: 1px solid var(--border-light);
         }
 
+        .footer-names,
+        .footer-thanks,
+        .footer-copynote {
+            opacity: 0;
+            transform: translateY(22px);
+            filter: blur(4px);
+            transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), 
+                        transform 0.85s cubic-bezier(0.16, 1, 0.3, 1), 
+                        filter 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform, filter;
+        }
+
+        .footer-clean.in-view .footer-names {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+            transition-delay: 0.12s;
+        }
+
+        .footer-clean.in-view .footer-thanks {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+            transition-delay: 0.24s;
+        }
+
+        .footer-clean.in-view .footer-copynote {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+            transition-delay: 0.36s;
+        }
+
         .footer-names {
             font-family: var(--font-serif);
             font-size: clamp(2rem, 4vw, 3.2rem);
@@ -1649,9 +1891,10 @@
 
         @media (max-width: 600px) {
             .countdown-minimal { padding: 1.4rem 0; }
-            .event-card-clean { padding: 2.8rem 1.4rem; border-radius: 18px; }
-            .venue-card-clean { padding: 3.4rem 1.4rem; border-radius: 20px; }
-            .action-links-row .clean-btn { width: 100%; max-width: 290px; justify-content: center; }
+            .event-card-clean { padding: 2.2rem 1.3rem; border-radius: 16px; }
+            .venue-card-clean { padding: 1.8rem 1.2rem; border-radius: 16px; max-width: 92vw; }
+            .action-links-row { gap: 0.65rem; }
+            .action-links-row .clean-btn { width: 100%; max-width: 240px; padding: 0.58rem 1rem; font-size: 0.68rem; justify-content: center; }
             .profile-photo-wrap { height: 400px; max-width: 300px; }
             .story-journey-container { padding-left: 44px; margin-top: 3rem; }
             .story-rail-track { left: 13px; }
@@ -2409,7 +2652,21 @@
                 rootMargin: "0px 0px -30px 0px"
             });
 
-            document.querySelectorAll('.section-reveal, .story-journey-item, .event-card-clean, .venue-card-clean').forEach(el => {
+            document.querySelectorAll(`
+                .section-reveal, 
+                .section-header-clean,
+                .verse-section,
+                .profile-card-clean, 
+                .event-card-clean, 
+                .venue-card-clean, 
+                .story-journey-item, 
+                .triptych-item,
+                .gift-section-clean,
+                .gift-card-clean,
+                .rsvp-form-card,
+                .wishes-stream-box,
+                .footer-clean
+            `).forEach(el => {
                 revealObserver.observe(el);
             });
 
